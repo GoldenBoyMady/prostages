@@ -1,13 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% endblock %}
+{% block title %}Entreprises{% endblock %}
 
-{% block body %}
-<style>
 
-</style>
+{% block contenu %}
 
-<div class="example-wrapper">
-    <h1></h1>
-</div>
+{% for entreprise in entreprises %}
+
+<p>{{ entreprise.nom }}</p>
+
+{% endfor %}
+
 {% endblock %}

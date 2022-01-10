@@ -1,13 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% endblock %}
+{% block title %}Formations{% endblock %}
 
-{% block body %}
-<style>
 
-</style>
+{% block contenu %}
 
-<div class="example-wrapper">
-    <h1></h1>
-</div>
+{% for formation in formations %}
+
+<h1>{{ formation.nomCourt }}</h1>
+
+{% endfor %}
+
 {% endblock %}

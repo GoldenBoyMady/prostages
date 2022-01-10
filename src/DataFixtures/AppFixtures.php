@@ -13,6 +13,9 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+        //RECUPERATION DE LA LIBRAIRIE FAKER
+        $faker = \Faker\Factory::create('fr_FR');
+
         // CREATION ENTREPRISES
         $entrepriseComitronic = new Entreprise();
         $entrepriseComitronic->setNom("COMITRONIC BTI");
@@ -23,7 +26,7 @@ class AppFixtures extends Fixture
 
         $entrepriseWebTech = new Entreprise();
         $entrepriseWebTech->setNom("Web Tech");
-        $entrepriseWebTech->setAdresse("101 Quai des Chartrons, Bordeaux");
+        $entrepriseWebTech->setAdresse($faker->address());// ici, aucune adresse retrouvable, utilisation de la librairie faker par défaut
         $entrepriseWebTech->setActivite("Développement web");
         $entrepriseWebTech->setSiteWeb("https://webtech.fr/");
         $entrepriseWebTech->setEmail("contact@webtech.fr");
@@ -59,31 +62,47 @@ class AppFixtures extends Fixture
 
 
         // CREATION FORMATIONS
-        $tableauFormations = array(
-            "DUT"=>"Diplôme Universitaire de Technologie",
-            "BUT"=>"Bachelor Universitaire de Technologie",
-            "BTS"=>"Brevet Technicien Supérieur",
-            "L1"=>"Licence 1",
-            "L2"=>"Licence 2",
-            "L3"=>"Licence 3",
-            "M1"=>"Master 1",
-            "M2"=>"Master 2",
-            "ING"=>"Ingénieur",
-        );
+        $formationDut = new Formation();
+        $formationDut->setNomCourt("DUT");
+        $formationDut->setNomLong("Diplôme Universitaire de Technologie");
 
-        $tableauFormationsInsérées = array(); // tableau contenant tous les objets créées à partir de la classe Formation
+        $formationBut = new Formation();
+        $formationBut->setNomCourt("BUT");
+        $formationBut->setNomLong("Bachelor Universitaire de Technologie");
 
-        foreach( $tableauFormations as $nomCourt => $nomComplet )
+        $formationBts = new Formation();
+        $formationBts->setNomCourt("BTS");
+        $formationBts->setNomLong("Brevet Technicien Supérieur");
+
+        $formationL1 = new Formation();
+        $formationL1->setNomCourt("L1");
+        $formationL1->setNomLong("Licence 1");
+
+        $formationL2 = new Formation();
+        $formationL2->setNomCourt("L2");
+        $formationL2->setNomLong("Licence 2");
+
+        $formationL3 = new Formation();
+        $formationL3->setNomCourt("L3");
+        $formationL3->setNomLong("Licence 3");
+
+        $formationM1 = new Formation();
+        $formationM1->setNomCourt("M1");
+        $formationM1->setNomLong("Master 1");
+
+        $formationM2 = new Formation();
+        $formationM2->setNomCourt("M2");
+        $formationM2->setNomLong("Master 2");
+
+        $formationIng = new Formation();
+        $formationIng->setNomCourt("Ingénieur");
+        $formationIng->setNomLong("Ingénieur");
+
+        $tableauFormations = array($formationDut,$formationBut,$formationBts,$formationL1,$formationL2,$formationL3,$formationM1,$formationM2,$formationIng);
+
+        foreach( $tableauFormations as $formation )
         {
-            $formation = new Formation();
-
-            $formation->setNomCourt($nomCourt);
-            $formation->setNomComplet($nomComplet);
-
-            $tableauFormationsInsérées.array_push($formation);
-
             $manager->persist($formation);
-
         }
 
 
@@ -99,8 +118,8 @@ class AppFixtures extends Fixture
             -Et de rendre nos utilisateurs heureux !");
 
             // Création relation Stage --> Formation
-            $stageComitronicWeb -> addIdFormation($tableauFormationsInsérées[5]);
-            $stageComitronicWeb -> addIdFormation($tableauFormationsInsérées[1]);
+            $stageComitronicWeb -> addIdFormation($formationBut);
+            $stageComitronicWeb -> addIdFormation($formationL3);
 
             // Création relation Stage --> Entreprise
             $stageComitronicWeb -> setIdEntreprise($tableauEntreprises[0]);
@@ -109,9 +128,9 @@ class AppFixtures extends Fixture
 
             /*----------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-            $stageComitronic = new Stage();
+            $stageComitronicSql = new Stage();
             $stageComitronicSql->setTitre("Développeur SQL H/F"); 
-            $stageComitronicWeb->setMission("Intégrez au sein du pôle technique de Bordeaux (Pessac), vos missions seront :
+            $stageComitronicSql->setMission("Intégrez au sein du pôle technique de Bordeaux (Pessac), vos missions seront :
 
             -De développer de nouvelles fonctionnalités sur les outils TimeOne,
             -D’améliorer les processus techniques et les environnements de développement,
@@ -119,9 +138,9 @@ class AppFixtures extends Fixture
             -Et de rendre nos utilisateurs heureux !");
 
             // Création relation Stage --> Formation
-            $stageComitronicSql -> addIdFormation($tableauFormationsInsérées[6]);
-            $stageComitronicSql -> addIdFormation($tableauFormationsInsérées[7]);
-            $stageComitronicSql -> addIdFormation($tableauFormationsInsérées[8]);
+            $stageComitronicSql -> addIdFormation($formationM1);
+            $stageComitronicSql -> addIdFormation($formationM2);
+            $stageComitronicSql -> addIdFormation($formationIng);
 
             // Création relation Stage --> Entreprise
             $stageComitronicSql -> setIdEntreprise($tableauEntreprises[0]);
@@ -143,9 +162,9 @@ class AppFixtures extends Fixture
             -de livrer le code sur le Git du projet.");
 
             // Création relation Stage --> Formation
-            $stageWebTech -> addIdFormation($tableauFormationsInsérées[0]);
-            $stageWebTech -> addIdFormation($tableauFormationsInsérées[1]);
-            $stageWebTech -> addIdFormation($tableauFormationsInsérées[2]);
+            $stageWebTech -> addIdFormation($formationDut);
+            $stageWebTech -> addIdFormation($formationBts);
+            $stageWebTech -> addIdFormation($formationBut);
 
             // Création relation Stage --> Entreprise
             $stageWebTech -> setIdEntreprise($tableauEntreprises[1]);
@@ -169,8 +188,8 @@ class AppFixtures extends Fixture
             Optimisation du code existant (refacto, bugfixing etc.)");
 
             // Création relation Stage --> Formation
-            $stageInflexsysMobile -> addIdFormation($tableauFormationsInsérées[0]);
-            $stageInflexsysMobile -> addIdFormation($tableauFormationsInsérées[1]);
+            $stageInflexsysMobile -> addIdFormation($formationDut);
+            $stageInflexsysMobile -> addIdFormation($formationBts);
 
             // Création relation Stage --> Entreprise
             $stageInflexsysMobile -> setIdEntreprise($tableauEntreprises[2]);
@@ -197,8 +216,8 @@ class AppFixtures extends Fixture
                 Vous pourrez proposer des améliorations sur la performance, l'ergonomie et les évolutions possibles");
 
             // Création relation Stage --> Formation
-            $stageInflexsysWeb -> addIdFormation($tableauFormationsInsérées[0]);
-            $stageInflexsysWeb -> addIdFormation($tableauFormationsInsérées[1]);
+            $stageInflexsysWeb -> addIdFormation($formationDut);
+            $stageInflexsysWeb -> addIdFormation($formationBts);
 
             // Création relation Stage --> Entreprise
              $stageInflexsysWeb -> setIdEntreprise($tableauEntreprises[2]);
@@ -216,7 +235,7 @@ class AppFixtures extends Fixture
                 Participation aux différentes cérémonies dans un cadre de travail Agile");
 
             // Création relation Stage --> Formation
-            $stageErcom -> addIdFormation($tableauFormationsInsérées[0]);
+            $stageErcom -> addIdFormation($formationBts);
 
             // Création relation Stage --> Entreprise
             $stageErcom -> setIdEntreprise($tableauEntreprises[3]);
@@ -235,7 +254,7 @@ class AppFixtures extends Fixture
             Proposer de nouvelles technos et solutions");
 
             // Création relation Stage --> Formation
-            $stageBixoko -> addIdFormation($tableauFormationsInsérées[8]);
+            $stageBixoko -> addIdFormation($formationIng);
 
             // Création relation Stage --> Entreprise
              $stageBixoko -> setIdEntreprise($tableauEntreprises[4]);
