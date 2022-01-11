@@ -7,8 +7,11 @@
 
 {% for formation in formations %}
 
-<h1>{{ formation.nomCourt }}</h1>
+<h1><a href="{{path("pro_stage_formations")}}/{{formation.getId()}}">{{ formation.getNomCourt() }}</a></h1>
 
 {% endfor %}
+
+{{ if (identifiant)}}
+<h1>yeet</h1>
 
 {% endblock %}

@@ -23,7 +23,7 @@ class ProStageController extends AbstractController
         
         $listeStage = $repertoireStage->findAll();
 
-        return $this->render('proStages/index.html.twig', ['stages' => 'listeStages']);
+        return $this->render('proStages/index.html.twig', ['stages' => $listeStage]);
     }
 
     /**
@@ -34,9 +34,9 @@ class ProStageController extends AbstractController
         // RECUPERATION REPERTOIRE Entreprise
         $repertoireEntreprise = $this->getDoctrine()->getRepository(Entreprise::class);
         
-        $entreprises = $repertoireEntreprise->findAll();
+        $listeEntreprises = $repertoireEntreprise->findAll();
 
-        return $this->render('proStages/entreprises.html.twig', ['entreprises' => 'entreprises']);
+        return $this->render('proStages/entreprises.html.twig', ['entreprises' => $listeEntreprises]);
     }
 
     /**
@@ -55,10 +55,10 @@ class ProStageController extends AbstractController
         // RECUPERATION DES STAGES PROPOSEES PAR L'ENTREPRISE FILTRE
         $repertoireStage = $this->getDoctrine()->getRepository(Stage::class);
 
-        $listeStages = $repertoireStage->findByEntreprise($entreprise);
+        $listeStages = $repertoireStage->FindBy(["id" => $id]);
 
 
-        return $this->render('proStages/entreprises.html.twig', ['nomEntreprise' => 'nomEntreprise','stages' => 'listeStages' ]);
+        return $this->render('proStages/entreprises.html.twig', ['nomEntreprise' => $nomEntreprise,'stages' => $listeStages]);
     }
 
     /**
@@ -69,9 +69,9 @@ class ProStageController extends AbstractController
         // RECUPERATION REPERTOIRE Formation
         $repertoireFormation = $this->getDoctrine()->getRepository(Formation::class);
         
-        $listeFormation = $repertoireFormation->findAll();
+        $listeFormations = $repertoireFormation->findAll();
 
-        return $this->render('proStages/formations.html.twig', ['formations' => 'listeFormation']);
+        return $this->render('proStages/formations.html.twig', ['formations' => $listeFormations]);
     }
 
     /**
@@ -90,9 +90,9 @@ class ProStageController extends AbstractController
         // RECUPERATION DES STAGES PROPOSEES PAR L'ENTREPRISE FILTRE
         $repertoireStage = $this->getDoctrine()->getRepository(Stage::class);
 
-        $listeStages = $repertoireStage->findByFormation($formation);
+        $listeStages = $repertoireStage->FindBy(["id" => $id]);
 
 
-        return $this->render('proStages/entreprises.html.twig', ['nomLongFormation' => 'nomLongFormation','stages' => 'listeStages']);
+        return $this->render('proStages/entreprises.html.twig', ['nomLongFormation' => $nomLongFormation,'stages' => $listeStages, 'identifiantFormation' => $id]);
     }
 }

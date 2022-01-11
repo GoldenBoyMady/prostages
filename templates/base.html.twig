@@ -20,6 +20,11 @@
     
     <body>
         {% block contenu %}
+            {% for stage in stages %}
+                <h1>{{ stage.titre }}</h1>
+                <h1>{{ stage.mission }}</h1>
+                <h1>-------------------------------------</h1>
+            {% endfor %}
         {% endblock %}
     </body>
 </html>
