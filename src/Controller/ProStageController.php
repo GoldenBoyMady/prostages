@@ -27,6 +27,21 @@ class ProStageController extends AbstractController
     }
 
     /**
+     * @Route("/descriptionStage/{id}", name="description_stage")
+     */
+    public function descriptionStage($id): Response
+    {
+        // RECUPERATION DE LA DESCRIPTION DU STAGE CHOISIT
+        $repertoireStage = $this->getDoctrine()->getRepository(Stage::class);
+
+        $stage = $repertoireStage->Find($id);
+        $entreprise = $stage->getIdEntreprise();
+        $listeFormations = $stage->getIdFormation();
+
+        return $this->render('proStages/descriptionStage.html.twig', ['stage' => $stage,'entreprise' => $entreprise, 'formations' => $listeFormations]);
+    }
+
+    /**
      * @Route("/entreprises", name="pro_stage_entreprises")
      */
     public function entreprises(): Response
@@ -58,7 +73,7 @@ class ProStageController extends AbstractController
         $listeStages = $repertoireStage->FindBy(["id" => $id]);
 
 
-        return $this->render('proStages/entreprises.html.twig', ['nomEntreprise' => $nomEntreprise,'stages' => $listeStages]);
+        return $this->render('proStages/stagesParEntreprises.html.twig', ['nomEntreprise' => $nomEntreprise,'stages' => $listeStages]);
     }
 
     /**
@@ -75,7 +90,7 @@ class ProStageController extends AbstractController
     }
 
     /**
-     * @Route("/formations/{id}", name="liste_stages_par_formations")
+     * @Route("/formations/{id}", name="liste_stages_par_formation")
      */
     public function listeStagesParFormations($id): Response
     {
@@ -88,11 +103,9 @@ class ProStageController extends AbstractController
 
 
         // RECUPERATION DES STAGES PROPOSEES PAR L'ENTREPRISE FILTRE
-        $repertoireStage = $this->getDoctrine()->getRepository(Stage::class);
-
-        $listeStages = $repertoireStage->FindBy(["id" => $id]);
+        $listeStages = $formation->getStages();
 
 
-        return $this->render('proStages/entreprises.html.twig', ['nomLongFormation' => $nomLongFormation,'stages' => $listeStages, 'identifiantFormation' => $id]);
+        return $this->render('proStages/stagesParFormations.html.twig', ['nomLongFormation' => $nomLongFormation,'stages' => $listeStages]);
     }
 }

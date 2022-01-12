@@ -14,15 +14,14 @@
 		<h3><a href="{{path("pro_stage_formations")}}">Formation</a></h3>
 		<h3><a href="{{path("pro_stage_entreprises")}}">Entreprise</a></h3>
 
-		<h1 align="center">ProStages</h1>
+		<h1 align="center"><a href="{{path("pro_stage_acceuil")}}">ProStages</a></h1>
 
 	</header>
     
     <body>
         {% block contenu %}
             {% for stage in stages %}
-                <h1>{{ stage.titre }}</h1>
-                <h1>{{ stage.mission }}</h1>
+                <h1><a href="{{path("description_stage",{"id":stage.id})}}">{{ stage.titre }}</a></h1>
                 <h1>-------------------------------------</h1>
             {% endfor %}
         {% endblock %}

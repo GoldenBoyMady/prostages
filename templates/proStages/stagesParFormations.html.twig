@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}stages de la formation {{nomLongFormation}}{% endblock %}
+
+
+{% block contenu %}
+
+{% for stage in stages %}
+
+    <h1>{{stage.titre}}</h1>
+    <h1>{{stage.mission}}</h1>
+    <center><h1>-----------------------------------------------------------------------</h1></center>
+
+{% else %}
+
+    <center><h1>Aucun stages pour cette formation !</h1></center>
+
+{% endfor %}
+
+{% endblock %}

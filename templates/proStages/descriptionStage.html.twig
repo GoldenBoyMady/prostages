@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Description du stage{% endblock %}
+
+
+{% block contenu %}
+    <h1>{{stage.titre}}</h1>
+
+    <h3>Mission du stage :</h3>
+
+    <p>{{stage.mission}}</p>
+
+    <h3>Formation(s) du stage :</h3>
+
+    {% for formation in formations %}
+        <p>{{formation.nomCourt}}</p>
+    {% endfor %}
+
+    <h3>Entreprise du stage :</h3>
+
+    <p>Nom : {{entreprise.nom}}</p>
+
+    <p>Adresse : {{entreprise.adresse}}</p>
+
+    <p>Activité : {{entreprise.activite}}</p>
+
+    <p>Site Web : {{entreprise.siteWeb}}</p>
+
+    <p>Contact : {{entreprise.email}}</p>
+
+{% endblock %}
