@@ -2,13 +2,14 @@
 
 {% block title %}Entreprises{% endblock %}
 
+{#Affichage de toutes les entreprises#}
 
 {% block contenu %}
 
-{% for entreprise in entreprises %}
+    {% for entreprise in entreprises %}
 
-<h1><a href="{{path("liste_stages_par_entreprise",{"id":entreprise.id})}}">{{ entreprise.nom}}</a></h1>
+        <h1><a href="{{path("liste_stages_par_entreprise",{"id":entreprise.id})}}">{{ entreprise.nom}}</a></h1>
 
-{% endfor %}
+    {% endfor %}
 
 {% endblock %}

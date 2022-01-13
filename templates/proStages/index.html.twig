@@ -1,8 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{#Affichage de tout les stages#}
 
-<style>
-</style>
-
+{% block contenu %}
+            {% for stage in stages %}
+                <h1><a href="{{path("description_stage",{"id":stage.id})}}">{{ stage.titre }}</a></h1>
+                <h1>-------------------------------------</h1>
+            {% endfor %}
 {% endblock %}

@@ -2,19 +2,21 @@
 
 {% block title %}stages de la formation {{nomLongFormation}}{% endblock %}
 
+{#Affichage de toutes les stages par la formation choisie#}
 
 {% block contenu %}
 
-{% for stage in stages %}
+    {% for stage in stages %}
 
-    <h1>{{stage.titre}}</h1>
-    <h1>{{stage.mission}}</h1>
-    <center><h1>-----------------------------------------------------------------------</h1></center>
+        <h1>{{stage.titre}}</h1>
+        <h1>{{stage.mission}}</h1>
+        <center><h1>-----------------------------------------------------------------------</h1></center>
 
-{% else %}
+    {% else %}
+    
+        {#MESSAGE D'ABSENCES DE STAGES#}
+        <center><h1>Aucun stages pour cette formation !</h1></center>
 
-    <center><h1>Aucun stages pour cette formation !</h1></center>
-
-{% endfor %}
+    {% endfor %}
 
 {% endblock %}

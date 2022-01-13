@@ -9,6 +9,8 @@
 
     </head>
 
+    {#Navigateur#}
+
     <header>
         <h3><a>Filtrer par :</a></h3>
 		<h3><a href="{{path("pro_stage_formations")}}">Formation</a></h3>
@@ -20,10 +22,6 @@
     
     <body>
         {% block contenu %}
-            {% for stage in stages %}
-                <h1><a href="{{path("description_stage",{"id":stage.id})}}">{{ stage.titre }}</a></h1>
-                <h1>-------------------------------------</h1>
-            {% endfor %}
         {% endblock %}
     </body>
 </html>

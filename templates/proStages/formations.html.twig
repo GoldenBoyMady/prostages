@@ -2,13 +2,14 @@
 
 {% block title %}Formations{% endblock %}
 
+{#Affichage de toutes les formations#}
 
 {% block contenu %}
 
-{% for formation in formations %}
+    {% for formation in formations %}
 
-<h1><a href="{{path("liste_stages_par_formation",{"id":formation.id})}}">{{ formation.nomCourt}}</a></h1>
+        <h1><a href="{{path("liste_stages_par_formation",{"id":formation.id})}}">{{ formation.nomCourt}}</a></h1>
 
-{% endfor %}
+    {% endfor %}
 
 {% endblock %}

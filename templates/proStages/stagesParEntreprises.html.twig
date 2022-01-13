@@ -2,19 +2,21 @@
 
 {% block title %}stages de l'entreprise {{nomEntreprise}}{% endblock %}
 
+{#Affichage de toutes les stages par l'entreprise choisie#}
 
 {% block contenu %}
 
-{% for stage in stages %}
+    {% for stage in stages %}
 
-<h1>{{stage.titre}}</h1>
-<h1>{{stage.mission}}</h1>
-<center><h1>-----------------------------------------------------------------------</h1></center>
+        <h1>{{stage.titre}}</h1>
+        <h1>{{stage.mission}}</h1>
+        <center><h1>-----------------------------------------------------------------------</h1></center>
 
-{% else %}
+    {% else %}
 
-    <center><h1>Aucun stages pour cette entreprise !</h1></center>
+        {#MESSAGE D'ABSENCE DE STAGES#}
+        <center><h1>Aucun stages pour cette entreprise !</h1></center>
 
-{% endfor %}
+    {% endfor %}
 
 {% endblock %}

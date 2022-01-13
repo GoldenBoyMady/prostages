@@ -4,17 +4,24 @@
 
 
 {% block contenu %}
+
+{#Description du stage #}
+
     <h1>{{stage.titre}}</h1>
 
     <h3>Mission du stage :</h3>
 
     <p>{{stage.mission}}</p>
 
+{#Les formations du stage#}
+
     <h3>Formation(s) du stage :</h3>
 
     {% for formation in formations %}
         <p>{{formation.nomCourt}}</p>
     {% endfor %}
+
+{#L'entreprise du stage#}
 
     <h3>Entreprise du stage :</h3>
 
